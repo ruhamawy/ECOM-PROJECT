@@ -8,6 +8,9 @@ public class EcomProjApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcomProjApplication.class, args);
+		
+
 	}
+
 
 }
