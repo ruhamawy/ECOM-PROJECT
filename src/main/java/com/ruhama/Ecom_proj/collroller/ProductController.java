@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -48,4 +49,25 @@ public class ProductController {
 
         }
     }
+    @PutMapping("/update/{id}")
+    public  ResponseEntity<?> updatingProduct(@PathVariable int id,@RequestPart Product product
+    ,@RequestPart MultipartFile image) throws IOException {
+        Product product1 = service.updateProducts(id, product, image);
+        if (product1 != null) {
+            return new ResponseEntity("Updated", HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity("Bad request", HttpStatus.NOT_FOUND);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int id){
+        Product product1=service.getproduct(id);
+        if(product1!=null)      {
+            service.deleteProducts(id);
+            return new ResponseEntity("deleted", HttpStatus.OK);
+    }
+        else
+                return new ResponseEntity("Bad request", HttpStatus.NOT_FOUND);
 }
+    }
+
